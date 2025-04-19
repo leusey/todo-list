@@ -1,6 +1,6 @@
 import "./App.css";
-import TodoList from "./TodoList";
-import TodoForm from "./TodoForm";
+import TodoList from "./features/TodoList/TodoList";
+import TodoForm from "./features/TodoForm";
 import { useState } from "react";
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
     const newTodo = {
       id: Date.now(),
       title: title,
-      isCompleted: false
+      isCompleted: false,
     };
     setTodoList([...todoList, newTodo]);
   }
@@ -22,7 +22,7 @@ function App() {
       }
       return todo;
     });
-    
+
     setTodoList(updatedTodos);
   }
 
