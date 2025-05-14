@@ -1,4 +1,23 @@
 import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+
+const StyledForm = styled.form`
+  margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`;
+
+const StyledButton = styled.button`
+  font-family: "Arial", sans-serif;
+  padding: 8px;
+  margin: 5px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+`;
 
 function TodosViewForm({
   sortDirection,
@@ -22,7 +41,7 @@ function TodosViewForm({
   }, [localQueryString, setQueryString]);
 
   return (
-    <form onSubmit={preventRefresh}>
+    <StyledForm onSubmit={preventRefresh}>
       {/* Search Controls */}
       <div>
         <label>
@@ -33,9 +52,9 @@ function TodosViewForm({
             onChange={(e) => setLocalQueryString(e.target.value)}
           />
         </label>
-        <button type="button" onClick={() => setLocalQueryString("")}>
+        <StyledButton type="button" onClick={() => setLocalQueryString("")}>
           Clear
-        </button>
+        </StyledButton>
       </div>
 
       {/* Sort Controls */}
@@ -68,7 +87,7 @@ function TodosViewForm({
           </select>
         </label>
       </div>
-    </form>
+    </StyledForm>
   );
 }
 
