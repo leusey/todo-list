@@ -39,44 +39,107 @@ function reducer(state = initialState, action) {
   switch (action.type) {
     case actions.fetchTodos:
       return {
-        ...state
+        ...state,
+        isLoading: true,
       };
-    case actions.loadTodos:
+
+    case actions.loadTodos: {
+      const todos = action.records.map((record) => {
+        const todo = {
+          id: record.id,
+          ...record.fields,
+        };
+
+        if (!todo.isCompleted) {
+          todo.isCompleted = false;
+        }
+
+        if (!todo.title) {
+          todo.title = "";
+        }
+
+        return todo;
+      });
+
       return {
-        ...state
+        ...state,
+        todoList: todos,
+        isLoading: false,
       };
+    }
+
     case actions.setLoadError:
       return {
-        ...state
+        ...state,
+        errorMessage: action.error.message,
+        isLoading: false,
       };
+
     case actions.startRequest:
       return {
-        ...state
+        ...state,
+        isSaving: true,
       };
-    case actions.addTodo:
+
+    case actions.addTodo: {
+      const savedTodo = {
+        id: action.record.id,
+        ...action.record.fields,
+      };
+
+      if (!savedTodo.isCompleted) {
+        savedTodo.isCompleted = false;
+      }
+
       return {
-        ...state
+        ...state,
+        todoList: [...state.todoList, savedTodo],
+        isSaving: false,
       };
+    }
+
     case actions.endRequest:
       return {
-        ...state
+        ...state,
+        isLoading: false,
+        isSaving: false,
       };
-    case actions.updateTodo:
-      return {
-        ...state
-      };
-    case actions.completeTodo:
-      return {
-        ...state
-      };
+
     case actions.revertTodo:
-      return {
-        ...state
+    case actions.updateTodo: {
+      const updatedTodos = state.todoList.map((todo) =>
+        todo.id === action.editedTodo.id ? action.editedTodo : todo
+      );
+
+      const updatedState = {
+        ...state,
+        todoList: updatedTodos,
       };
+
+      if (action.error) {
+        updatedState.errorMessage = action.error.message;
+      }
+
+      return updatedState;
+    }
+
+    case actions.completeTodo: {
+      const updatedTodos = state.todoList.map((todo) =>
+        todo.id === action.id ? { ...todo, isCompleted: true } : todo
+      );
+
+      return {
+        ...state,
+        todoList: updatedTodos,
+      };
+    }
+
     case actions.clearError:
       return {
-        ...state
+        ...state,
+        errorMessage: "",
       };
+
     default:
       return state;
   }
