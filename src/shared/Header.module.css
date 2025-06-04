@@ -1,0 +1,29 @@
+.header {
+  position: relative;
+  padding: 3rem 1rem 1rem;
+}
+
+.title {
+  text-align: center;
+  margin: 0;
+  font-size: 2rem;
+  color: black;
+}
+
+.nav {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.active {
+  color: gray; /* subdued color for active links */
+  text-decoration: underline;
+}
+
+.inactive {
+  color: black; /* primary color for inactive links */
+  text-decoration: none;
+}

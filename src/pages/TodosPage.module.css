@@ -1,0 +1,31 @@
+.container {
+  padding: 1rem;
+}
+
+.errorMessage {
+  color: red;
+  margin-top: 1rem;
+}
+
+.paginationControls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.paginationControls button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.paginationControls button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.paginationControls span {
+  font-weight: bold;
+}
