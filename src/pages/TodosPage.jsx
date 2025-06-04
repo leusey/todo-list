@@ -26,7 +26,7 @@ function TodosPage({
   const indexOfFirstTodo = (currentPage - 1) * itemsPerPage;
 
   const filteredTodoList = todoState.todoList.filter((todo) => {
-    return todo.fields.title
+    return todo.title
       .toLowerCase()
       .includes(queryString.toLowerCase());
   });
