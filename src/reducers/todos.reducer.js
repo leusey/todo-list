@@ -48,15 +48,9 @@ function reducer(state = initialState, action) {
         const todo = {
           id: record.id,
           ...record.fields,
+          title: record.fields.title || "",
+          isCompleted: !!record.fields.isCompleted,
         };
-
-        if (!todo.isCompleted) {
-          todo.isCompleted = false;
-        }
-
-        if (!todo.title) {
-          todo.title = "";
-        }
 
         return todo;
       });
